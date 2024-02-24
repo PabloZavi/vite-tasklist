@@ -41,29 +41,34 @@ const getTodos = (filter = Filters.All) => {
   }
 };
 
+//Adding the task (1st mayus - rest minus)
+const formatTodo = (todo) => {
+ const newTodo = (todo.trim().charAt(0).toUpperCase()) + (todo.trim().toLowerCase().slice(1))
+ return newTodo;
+}
+
 const addTodo = (description) => {
   if (!description) throw new Error('Description is required');
-  state.todos.push(new Todo(description));
+  state.todos.push(new Todo(formatTodo(description)));
 };
 
-const toggleTodo = (todoId, description, done) => {
+const markTodo = (todoId) => {
   if (!todoId) throw new Error('Id is required');
   state.todos.map((todo) => {
-    if (todo.id === todoId) {
-      description && (todo.description = description);
-      done && (todo.done = done);
-    }
+    todo.id === todoId && (todo.done = !todo.done);
+
     return todo;
   });
+};
 
-  /*
-  state.todos = state.todos.map( todo => {
-    if (todo.id === todoId){
-      todo.done= !todo.done;
-    }
-      return todo
-  })
-  */
+
+const editTodo = (todoId, description) => {
+  if (!todoId) throw new Error('Id is required');
+  if (!description) throw new Error('description is required');
+  state.todos.map((todo) => {
+    todo.id === todoId && (todo.description = formatTodo(description));
+    return todo;
+  });
 };
 
 const deleteTodo = (todoId) => {
@@ -90,7 +95,8 @@ export default {
   loadStore,
   getTodos,
   addTodo,
-  toggleTodo,
+  markTodo,
+  editTodo,
   deleteTodo,
   deleteCompleted,
   setFilter,

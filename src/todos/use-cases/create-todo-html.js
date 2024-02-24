@@ -5,7 +5,7 @@ export const createTodo = (todo) => {
   const html = `  
     <div class="view">
         <input class="toggle" type="checkbox" ${done && 'checked'}>
-        <label>${description}</label>
+        <label contentEditable="true">${description}</label>
         <button class="destroy"></button>
     </div>
     <input class="edit" value="Create a TodoMVC template">
@@ -18,7 +18,7 @@ export const createTodo = (todo) => {
   //We add the html in the li element
   li.innerHTML = html;
   //If the task is completed, we asign the class 'completed'
-  done &&= li.classList.add('completed');
+  done && li.classList.add('completed');
 
   return li;
 };
