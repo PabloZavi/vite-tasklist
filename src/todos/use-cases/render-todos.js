@@ -5,8 +5,8 @@ let element;
 
 /**
  *
- * @param {String} HTMLId
- * @param {Todo} todos
+ * @param {String} HTMLId In which part of HTML we'll render the todos
+ * @param {Todo} todos The todos to be rendered
  */
 export const renderTodos = (HTMLId, todos = []) => {
   //We do this in order not to call the DOM every time, only the first one.

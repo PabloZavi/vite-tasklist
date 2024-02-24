@@ -43,9 +43,10 @@ const getTodos = (filter = Filters.All) => {
 
 //Adding the task (1st mayus - rest minus)
 const formatTodo = (todo) => {
- const newTodo = (todo.trim().charAt(0).toUpperCase()) + (todo.trim().toLowerCase().slice(1))
- return newTodo;
-}
+  const newTodo =
+    todo.trim().charAt(0).toUpperCase() + todo.trim().toLowerCase().slice(1);
+  return newTodo;
+};
 
 const addTodo = (description) => {
   if (!description) throw new Error('Description is required');
@@ -61,14 +62,27 @@ const markTodo = (todoId) => {
   });
 };
 
-
 const editTodo = (todoId, description) => {
   if (!todoId) throw new Error('Id is required');
   if (!description) throw new Error('description is required');
   state.todos.map((todo) => {
     todo.id === todoId && (todo.description = formatTodo(description));
+
     return todo;
   });
+};
+
+const todoExists = (description) => {
+  if (!description) throw new Error('description is required');
+  let exists = false;
+  getTodos().map((todo) => {
+    if (
+      todo.description.trim().toLowerCase() === description.trim().toLowerCase()
+    ) {
+      exists = true;
+    }
+  });
+  return exists;
 };
 
 const deleteTodo = (todoId) => {
@@ -101,4 +115,5 @@ export default {
   deleteCompleted,
   setFilter,
   getCurrentFilter,
+  todoExists,
 };

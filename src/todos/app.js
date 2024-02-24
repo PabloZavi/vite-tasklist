@@ -36,6 +36,7 @@ export const App = (elementId) => {
     //Witch 'closest' we search the nearest parameter going up
     //We extract the id of the element we did click
     const idTodo = event.target.closest(`[data-id]`).getAttribute('data-id');
+
     //!Mark a todo
     //If we click a checkbox, we mark/unmark the element
     if (event.target.getAttribute('type') === 'checkbox') {
@@ -68,14 +69,10 @@ export const App = (elementId) => {
     if (event.target.value.trim().length === 0) return; //If the description is empty, don't continue
 
     //If the task already exists...
-    todoStore.getTodos().map((todo) => {
-      if (
-        todo.description.toLowerCase() ===
-        event.target.value.trim().toLowerCase()
-      ) {
-        throw new Error(`The task ${event.target.value.trim()} already exists`);
-      }
-    });
+    if (todoStore.todoExists(event.target.value)) {
+      window.alert(`The task ${event.target.value.trim()} already exists`);
+      throw new Error(`The task ${event.target.value.trim()} already exists`);
+    }
 
     //Adding the task (1st mayus - rest minus)
     todoStore.addTodo(event.target.value);
