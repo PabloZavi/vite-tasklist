@@ -36,7 +36,7 @@ const saveStateToLocalStorage = () => {
 };
 
 const getTodos = (filter = Filters.All) => {
-  loadStore();
+  loadState();
   switch (filter) {
     case Filters.All:
       return [...state.todos];
@@ -119,7 +119,6 @@ const getCurrentFilter = () => {
 
 export default {
   initStore,
-  loadStore,
   getTodos,
   addTodo,
   markTodo,
