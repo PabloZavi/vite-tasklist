@@ -257,13 +257,14 @@ body {
   margin-bottom: -1px;
 }
 
-.footer {
+.footer, .footer2{
   padding: 10px 15px;
   height: 20px;
   text-align: center;
   font-size: 15px;
   border-top: 1px solid #e6e6e6;
 }
+
 
 .footer:before {
   content: '';
@@ -315,6 +316,7 @@ body {
 
 .filters li a.selected {
   border-color: rgba(175, 47, 47, 0.2);
+  background-color: #e6f026;
 }
 
 .clear-completed,

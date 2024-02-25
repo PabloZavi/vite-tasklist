@@ -1,20 +1,14 @@
 import { Todo } from '../todos/models/todo.model';
 
-const Filters = {
-  All: 'all',
-  Completed: 'completed',
-  Pending: 'pending',
+export const Filters = {
+  All: 'All',
+  Completed: 'Completed',
+  Pending: 'Pending',
 };
 
 //Initial global state
 const state = {
-  todos: [
-    /* new Todo('Water'),
-    new Todo('Milk'),
-    new Todo('Eggs'),
-    new Todo('Chocolate'),
-    new Todo('Apples'), */
-  ],
+  todos: [],
   filter: Filters.All,
 };
 
@@ -101,18 +95,10 @@ const deleteTodo = (todoId) => {
   saveStateToLocalStorage();
 };
 
-/* const deleteCompleted = () => {
-  state.todos = state.todos.filter((todo) => todo.done);
-  saveStateToLocalStorage();
-}; */
 const deleteCompleted = () => {
-  let notDoneTodos = state.todos.filter((todo) => 
+  state.todos = state.todos.filter((todo) => 
     !todo.done
   );
-  /* state.todos = state.todos.filter((todo) => {
-    if(todo.done) {}
-  }); */
-  state.todos = notDoneTodos;
   saveStateToLocalStorage();
 };
 

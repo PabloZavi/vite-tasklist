@@ -1,6 +1,6 @@
 import html from './app.html?raw';
-import todoStore from '../store/todo.store';
-import { renderTodos } from './use-cases';
+import todoStore, { Filters } from '../store/todo.store';
+import { renderTodos, pendingCount, markCurrentFilter } from './use-cases';
 
 const HTMLIds = {
   TodoList: '.todo-list',
@@ -8,17 +8,20 @@ const HTMLIds = {
   ClearCompleted: '.clear-completed',
   MarkAllCompleted: '#mark-all-completed',
   MarkAllNotCompleted: '#mark-all-not-completed',
-
+  LiFilters: '.filter',
+  PendingCount: '#pending-count',
 };
 
-/**
- *
- * @param {String} elementId
- */
 export const App = (elementId) => {
   const displayTodos = () => {
-    const todos = todoStore.getTodos(todoStore.getCurrentFilter());
+    const filter = localStorage.getItem('state')
+      ? JSON.parse(localStorage.getItem('state')).filter
+      : Filters.All;
+    const todos = todoStore.getTodos(filter);
+
     renderTodos(HTMLIds.TodoList, todos);
+    markCurrentFilter(HTMLIds.LiFilters);
+    pendingCount(HTMLIds.PendingCount);
   };
 
   (() => {
@@ -33,13 +36,15 @@ export const App = (elementId) => {
   const todoListUL = document.querySelector(HTMLIds.TodoList);
   const clearCompleted = document.querySelector(HTMLIds.ClearCompleted);
   const markAllCompleted = document.querySelector(HTMLIds.MarkAllCompleted);
-  const markAllNotCompleted = document.querySelector(HTMLIds.MarkAllNotCompleted);
+  const markAllNotCompleted = document.querySelector(
+    HTMLIds.MarkAllNotCompleted
+  );
+  const liFilters = document.querySelectorAll(HTMLIds.LiFilters);
 
   //Listeners
   //!Click over a todo....
   //When we do click over an element inside the ul list...
   todoListUL.addEventListener('click', (event) => {
-    console.log(event.target.getAttribute('class'));
     //Witch 'closest' we search the nearest parameter going up
     //We extract the id of the element we did click
     const idTodo = event.target.closest(`[data-id]`).getAttribute('data-id');
@@ -93,17 +98,39 @@ export const App = (elementId) => {
   clearCompleted.addEventListener('click', () => {
     todoStore.deleteCompleted();
     displayTodos();
-  })
+  });
 
   //!Mark all completed
   markAllCompleted.addEventListener('click', () => {
     todoStore.markAllCompleted();
     displayTodos();
-  })
+  });
 
   //!Mark all NOT completed
   markAllNotCompleted.addEventListener('click', () => {
     todoStore.markAllNotCompleted();
     displayTodos();
-  })
+  });
+
+  //!When we click a filter...
+  liFilters.forEach((element) => {
+    element.addEventListener('click', (elem) => {
+      liFilters.forEach((el) => el.classList.remove('selected'));
+      elem.target.classList.add('selected');
+      switch (elem.target.textContent) {
+        case 'All':
+          todoStore.setFilter(Filters.All);
+          break;
+        case 'Pending':
+          todoStore.setFilter(Filters.Pending);
+          break;
+        case 'Completed':
+          todoStore.setFilter(Filters.Completed);
+          break;
+        default:
+          throw new Error('Not valid option');
+      }
+      displayTodos();
+    });
+  });
 };
