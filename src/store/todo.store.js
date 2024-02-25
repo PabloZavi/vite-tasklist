@@ -101,10 +101,30 @@ const deleteTodo = (todoId) => {
   saveStateToLocalStorage();
 };
 
-const deleteCompleted = () => {
+/* const deleteCompleted = () => {
   state.todos = state.todos.filter((todo) => todo.done);
   saveStateToLocalStorage();
+}; */
+const deleteCompleted = () => {
+  let notDoneTodos = state.todos.filter((todo) => 
+    !todo.done
+  );
+  /* state.todos = state.todos.filter((todo) => {
+    if(todo.done) {}
+  }); */
+  state.todos = notDoneTodos;
+  saveStateToLocalStorage();
 };
+
+const markAllCompleted = () =>{
+  state.todos.map(todo => todo.done = true)
+  saveStateToLocalStorage();
+}
+
+const markAllNotCompleted = () =>{
+  state.todos.map(todo => todo.done = false)
+  saveStateToLocalStorage();
+}
 
 const setFilter = (newFilter = Filters.All) => {
   if (!Object.keys(Filters).includes(newFilter))
@@ -128,4 +148,6 @@ export default {
   setFilter,
   getCurrentFilter,
   todoExists,
+  markAllCompleted,
+  markAllNotCompleted,
 };

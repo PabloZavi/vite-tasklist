@@ -5,6 +5,10 @@ import { renderTodos } from './use-cases';
 const HTMLIds = {
   TodoList: '.todo-list',
   NewTodoInput: '#new-todo-input',
+  ClearCompleted: '.clear-completed',
+  MarkAllCompleted: '#mark-all-completed',
+  MarkAllNotCompleted: '#mark-all-not-completed',
+
 };
 
 /**
@@ -27,6 +31,9 @@ export const App = (elementId) => {
   //HTML references (They go under the render)
   const newDescrInput = document.querySelector(HTMLIds.NewTodoInput);
   const todoListUL = document.querySelector(HTMLIds.TodoList);
+  const clearCompleted = document.querySelector(HTMLIds.ClearCompleted);
+  const markAllCompleted = document.querySelector(HTMLIds.MarkAllCompleted);
+  const markAllNotCompleted = document.querySelector(HTMLIds.MarkAllNotCompleted);
 
   //Listeners
   //!Click over a todo....
@@ -81,4 +88,22 @@ export const App = (elementId) => {
     //Cleaning the input
     event.target.value = '';
   });
+
+  //!Delete all completed todos
+  clearCompleted.addEventListener('click', () => {
+    todoStore.deleteCompleted();
+    displayTodos();
+  })
+
+  //!Mark all completed
+  markAllCompleted.addEventListener('click', () => {
+    todoStore.markAllCompleted();
+    displayTodos();
+  })
+
+  //!Mark all NOT completed
+  markAllNotCompleted.addEventListener('click', () => {
+    todoStore.markAllNotCompleted();
+    displayTodos();
+  })
 };
