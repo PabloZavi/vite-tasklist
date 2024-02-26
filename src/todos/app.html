@@ -1,0 +1,50 @@
+<section class="todoapp">
+    <header class="header">
+        <h1>Tasks</h1>
+        <input id="new-todo-input" class="new-todo" placeholder="¿What do you need to do?" autofocus>
+    </header>
+    
+    <!-- This section should be hidden by default and shown when there are todos -->
+    <section class="main">
+        <input id="toggle-all" class="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul class="todo-list">
+            <!-- Render here the todo list -->
+        </ul>
+    </section>
+
+    <footer class="footer">
+        <span class="todo-count"><strong id="pending-count">0</strong> pending</span>
+        <ul class="filters">
+            <li>
+                <a class="filter" href="">All</a>
+            </li>
+            <li>
+                <a class="filter" href="">Pending</a>
+            </li>
+            <li>
+                <a class="filter" href="">Completed</a>
+            </li>
+        </ul>
+        <!-- Hidden if no completed items are left ↓ -->
+        <a class="clear-completed">Delete completed</a>
+    </footer>
+
+    <footer class="footer2">
+        <ul class="filters">            
+            <li>
+                <a id="mark-all-completed" href="">Mark all completed</a>
+            </li>
+            <li>
+                <a id="mark-all-not-completed" href="">Mark all NOT completed</a>
+            </li>
+        </ul>
+    </footer>
+</section>
+
+
+<footer class="info">
+    <p>Template created by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+    <p>Modified by <a href="https://www.linkedin.com/in/pablozavi/">Pablo Zavi</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+</footer>
