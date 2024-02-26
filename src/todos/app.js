@@ -1,6 +1,11 @@
 import html from './app.html?raw';
 import todoStore, { Filters } from '../store/todo.store';
-import { renderTodos, pendingCount, markCurrentFilter } from './use-cases';
+import {
+  renderTodos,
+  pendingCount,
+  markCurrentFilter,
+  hideElement,
+} from './use-cases';
 
 const HTMLIds = {
   TodoList: '.todo-list',
@@ -22,6 +27,24 @@ export const App = (elementId) => {
     renderTodos(HTMLIds.TodoList, todos);
     markCurrentFilter(HTMLIds.LiFilters);
     pendingCount(HTMLIds.PendingCount);
+    hideElements();
+  };
+
+  const hideElements = () => {
+     //!Hide/unhide delete completed
+    todoStore.getTodos(Filters.Completed).length === 0
+      ? hideElement(HTMLIds.ClearCompleted, true)
+      : hideElement(HTMLIds.ClearCompleted, false); 
+      
+    //!Hide/Unhide Mark all completed
+    todoStore.getTodos().length === todoStore.getTodos(Filters.Completed).length
+      ? hideElement(HTMLIds.MarkAllCompleted, true)
+      : hideElement(HTMLIds.MarkAllCompleted, false);
+
+    //!Hide/unhide Mark All NOT completed
+    todoStore.getTodos(Filters.Completed).length === 0
+      ? hideElement(HTMLIds.MarkAllNotCompleted, true)
+      : hideElement(HTMLIds.MarkAllNotCompleted, false);
   };
 
   (() => {

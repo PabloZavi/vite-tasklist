@@ -9,62 +9,34 @@
         <input id="toggle-all" class="toggle-all" type="checkbox">
         <label for="toggle-all">Mark all as complete</label>
         <ul class="todo-list">
-            <!-- These are here just to show the structure of the list items -->
-            <!-- List items should get the class "editing" when editing and "completed" when marked as completed -->
-            <!-- <li class="completed" data-id="abc">
-                <div class="view">
-                    <input class="toggle" type="checkbox" checked>
-                    <label>Probar JavaScript</label>
-                    <button class="destroy"></button>
-                </div>
-                <input class="edit" value="Create a TodoMVC template">
-            </li> -->
-            <!-- <li class="completed" data-id="abc">
-                <div class="view">
-                    <input class="toggle" type="checkbox" checked>
-                    <label>Probar JavaScript</label>
-                    <button class="destroy"></button>
-                </div>
-                <input class="edit" value="Create a TodoMVC template">
-            </li> -->
-            <!-- <li>
-                <div class="view">
-                    <input class="toggle" type="checkbox">
-                    <label>Comprar un unicornio</label>
-                    <button class="destroy"></button>
-                </div>
-                <input class="edit" value="Rule the web">
-            </li> -->
+            <!-- Render here the todo list -->
         </ul>
     </section>
 
-    <!-- This footer should hidden by default and shown when there are todos -->
     <footer class="footer">
-        <!-- This should be "0 items left" by default -->
         <span class="todo-count"><strong id="pending-count">0</strong> pending</span>
-        <!-- Remove this if you don't implement routing -->
         <ul class="filters">
             <li>
-                <a class="filter" href="#/all">All</a>
+                <a class="filter" href="">All</a>
             </li>
             <li>
-                <a class="filter" href="#/pending">Pending</a>
+                <a class="filter" href="">Pending</a>
             </li>
             <li>
-                <a class="filter" href="#/completed">Completed</a>
+                <a class="filter" href="">Completed</a>
             </li>
         </ul>
         <!-- Hidden if no completed items are left ↓ -->
-        <button class="clear-completed">Delete completed</button>
+        <a class="clear-completed">Delete completed</a>
     </footer>
 
     <footer class="footer2">
         <ul class="filters">            
             <li>
-                <a id="mark-all-completed" href="#/allcompleted">Mark all completed</a>
+                <a id="mark-all-completed" href="">Mark all completed</a>
             </li>
             <li>
-                <a id="mark-all-not-completed" href="#/allnotcompleted">Mark all NOT completed</a>
+                <a id="mark-all-not-completed" href="">Mark all NOT completed</a>
             </li>
         </ul>
     </footer>
@@ -73,7 +45,6 @@
 
 <footer class="info">
     <p>Template created by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
-    <!-- Change this out with your name and url ↓ -->
     <p>Modified by <a href="https://www.linkedin.com/in/pablozavi/">Pablo Zavi</a></p>
     <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
 </footer>

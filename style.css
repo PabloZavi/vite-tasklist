@@ -257,14 +257,14 @@ body {
   margin-bottom: -1px;
 }
 
-.footer, .footer2{
+.footer,
+.footer2 {
   padding: 10px 15px;
   height: 20px;
   text-align: center;
   font-size: 15px;
   border-top: 1px solid #e6e6e6;
 }
-
 
 .footer:before {
   content: '';
@@ -326,10 +326,11 @@ html .clear-completed:active {
   line-height: 20px;
   text-decoration: none;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 
 .clear-completed:hover {
-  text-decoration: underline;
+  border: 1px solid rgba(175, 47, 47, 0.1);
 }
 
 .info {
@@ -519,4 +520,8 @@ hr {
   .learn-bar > .learn {
     left: 8px;
   }
+}
+
+.element-disabled {
+  color: #d7e2e2;
 }
